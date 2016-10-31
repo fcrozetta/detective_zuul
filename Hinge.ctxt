@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.params=id\ description
+comment0.target=Hinge(int,\ java.lang.String)
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ Hinge\n
+comment1.params=key
+comment1.target=boolean\ unlock(int)
+comment1.text=\n\ Tries\ to\ unlock\ the\ object\ with\ the\ id\ of\ the\ key\n\ \n\ @param\ key\ \ \ id\ of\ the\ key\ to\ unlock\ the\ furniture\n\ \n\ @return\ \ bool\ \ \ \ true\ if\ it\ unlocks\ the\ door.\n
+comment2.params=
+comment2.target=boolean\ open()
+comment2.text=\n\ open/close\ the\ object,\ if\ it's\ not\ locked\n\ \n\ @return\ bool\ true\ if\ stateChanged\n
+numComments=3
