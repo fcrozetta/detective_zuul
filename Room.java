@@ -16,6 +16,7 @@ import java.util.HashMap;
 public class Room extends Thing
 {
     private HashMap<String,Side> sides;
+    private Side north, south, east, west, up, down;
     
     /**
      * Create a room described "description". 
@@ -25,37 +26,24 @@ public class Room extends Thing
      */
     public Room(int id, String description) 
     {
+        
         super(id,description);
-        sides = new HashMap<String,Side>();   
-        this.setEmptyRoom();
-    }
-    
-    /**
-     * Defines this room as empty: no sides at all.
-     * The player will not be able do reach this room
-     */   
-    public void setEmptyRoom(){
-       this.sides.put("north",null); 
-       this.sides.put("south",null); 
-       this.sides.put("east",null); 
-       this.sides.put("west",null); 
-       this.sides.put("up",null); 
-       this.sides.put("down",null); 
-    }
-    
-    /**
-     * Add a room, to a given side
-     */
-    public void add(String direction,Side side){
-        this.sides.put(direction,side);
-    }
-    
-    /**
-     * Set the direction's side to null
-     */
-    public void remove(String direction){
-        this.sides.put(direction,null);
-    }
+        sides = new HashMap<String,Side>();
+        
+        Side north = new Side(1,"north");
+        Side south = new Side(2,"south");
+        Side east = new Side(3,"east");
+        Side west = new Side(4,"west");
+        Side up = new Side(5,"ceiling");
+        Side down = new Side(6,"floor");        
+        
+        this.sides.put("north",north);
+        this.sides.put("south",south); 
+        this.sides.put("east",east);
+        this.sides.put("west",west);
+        this.sides.put("up",up);
+        this.sides.put("down",down);
+    }              
     
     
     /**
@@ -63,7 +51,7 @@ public class Room extends Thing
      * 
      * @param direction String with the direction
      */
-    public Side look(String direction){
+    public Side getSide(String direction){        
         return sides.get(direction);
     }
     

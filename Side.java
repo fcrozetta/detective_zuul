@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 /**
- * This class creates a wall, where the objects, and furniture will be placed.
+ * This class creates a wall, where the objects, doors, and furnitures will be placed.
  * 
  * @author Fernando H. Crozetta 
  * @version 0.0.1
@@ -40,7 +40,7 @@ public class Side extends Thing
      * 
      * @param thing an object
      */
-    public void add(Thing thing){
+    protected void addThing(Thing thing){
         this.allObjects.add(thing);
     }
     
@@ -49,11 +49,24 @@ public class Side extends Thing
      * 
      * @param id id of the object to remove
      */
-    public void remove(int id){
+    protected void remove(int id){
         for(Thing t:allObjects){
             if(t.getId() == id){
                 this.allObjects.remove(t);
             }
         }
+    }
+    /**
+     * Return true if has a door attached
+     * 
+     * @return hasDoor
+     */
+    protected boolean hasDoor(){
+        for(Thing t:allObjects){
+            if(t instanceof Door){
+                return true;
+            }
+        }
+        return false;
     }
 }

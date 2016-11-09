@@ -8,7 +8,7 @@
 public class Door extends Hinge
 {
     // this is the id of the room you go when pass trhough the door    
-    private Room otherRoom;
+    private Room room1, room2;
 
     /**
      * Constructor for objects of class Door
@@ -16,25 +16,32 @@ public class Door extends Hinge
     public Door(int id, String description)
     {
         super(id,description);
-        this.otherRoom = null;
+        this.room1 = null;
+        this.room2 = null;
     }
     
     /**
-     * Set the other Room
+     * LinkRooms
      * 
-     * @param room The room you'll when you pass this object
+     * @param room1 The first room you'll link
+     * @param room2 The second room you'll link
      */
-    public void setOtherRoom(Room room){
-        this.otherRoom = room;
+    public void linkRooms(Room room1,Room room2){
+        this.room1 = room1;
+        this.room2 = room2;
     }
     
     /**
-     * returns the next room, or null
+     * returns the next room
      * 
-     * @return otherRoom
+     * @return The room which tou are not passing
      */
-    public Room getOtherRoom(){
-        return this.otherRoom;
+    public Room getOtherRoom(Room currentRoom){
+        if(room1 == currentRoom){
+            return room2;
+        }else{
+            return room1;
+        }                
     }
-    
+        
 }

@@ -23,8 +23,8 @@ public class Game
      */
     public Game() 
     {
-        createStage();
         parser = new Parser();
+        currentStage = createStage();
     }
 
     private void printLocationInfo(){
@@ -32,12 +32,10 @@ public class Game
     }
     
     /**
-     * Create all the rooms and link their exits together.
+     * Create all the rooms,furniture,items, and link their exits together.
      */
-    private void createStage()
-    {'
-        Room outside, livingRoom, kitchen, bathroom, stairs, bedroom, bathroom2;
-        
+    private Stage createStage()
+    {   
         /*
          * Case:
          * The murder gets inside the home breaking the glass on the front door, 
@@ -50,67 +48,37 @@ public class Game
          * 
          */
         
+        Stage stage = new Stage(1,"there was a murder in this house. you need to figure out what happened");
         //creating rooms
-        outside = new Room("Outside of the house. Not a big house.\nThere is a broken glass on the front door");
-        livingRoom = new Room("The living room.\nYou can see a chandelier up above, and a large table in front of you.\nthere is one plate ont the table");
-        kitchen = new Room("The kitchen.\nYou can see a stove.\nYou can sense the smell of burning on the stove");
-        bathroom = new Room("The bathroom.\nYou can see that nothing was touched here.\nlooks like nothing happened here");
-        stairs = new Room("The stairs.\nthe stairs are made of wood.\nYou can see a loose step");
-        bedroom = new Room("The bedroom.\nYou can see a trail of blood leading to the bedroom's bathroom.\nThere is a purse open up on the bed.\nThe drawers are open and some objects are missing.");
-        bathroom2 = new Room("The bathroom.\nThis bathroom is covered in blood and you can see a corpse inside the tub.\nshe has a deep cut on her leg");
+        Room outside = stage.createRoom("Outside of the house. Not a big house.\nThere is a broken glass on the front door");
+        Room livingRoom = stage.createRoom("The living room.\nYou can see a chandelier up above, and a large table in front of you.\nthere is one plate ont the table");
+        Room kitchen = stage.createRoom("The kitchen.\nYou can see a stove.\nYou can sense the smell of burning on the stove");
+        Room bathroom = stage.createRoom("The bathroom.\nYou can see that nothing was touched here.\nlooks like nothing happened here");
+        Room stairs = stage.createRoom("The stairs.\nthe stairs are made of wood.\nYou can see a loose step");
+        Room bedroom = stage.createRoom("The bedroom.\nYou can see a trail of blood leading to the bedroom's bathroom.\nThere is a purse open up on the bed.\nThe drawers are open and some objects are missing.");
+        Room bathroom2 = stage.createRoom("The bathroom.\nThis bathroom is covered in blood and you can see a corpse inside the tub.\nshe has a deep cut on her leg");
         
-        // initialise room exits       
-        // north,east,south,west
-        outside.setExits(new HashMap<String,Room>(){{
-            put("north",livingRoom);
-            put("east",null);
-            put("south",null);
-            put("west",null);
-        }});
+        stage.attachRoom(outside, "north", livingRoom);
         
-        livingRoom.setExits(new HashMap<String,Room>(){{
-           put("north",stairs);
-           put("east",bathroom);
-           put("south",outside);
-           put("west",kitchen);
-        }});
-                
-        stairs.setExits(new HashMap<String,Room>(){{
-            put("north",bedroom);
-            put("east",null);
-            put("south",livingRoom);
-            put("west",null);
-        }});
+        stage.attachRoom(livingRoom,"north",stairs);
+        stage.attachRoom(livingRoom,"east",bathroom);
+        stage.attachRoom(livingRoom,"west",kitchen);
         
-        bathroom.setExits(new HashMap<String,Room>(){{
-            put("north",null);
-            put("east",null);
-            put("south",null);
-            put("west",livingRoom);
-        }});
+        stage.attachRoom(stairs, "north", bedroom);
+        stage.attachRoom(stairs, "south", livingRoom);
         
-        kitchen.setExits(new HashMap<String,Room>(){{
-            put("north",null);
-            put("east",livingRoom);
-            put("south",null);
-            put("west",null);
-        }});
+        stage.attachRoom(bathroom, "south", livingRoom);
         
-        bedroom.setExits(new HashMap<String,Room>(){{
-            put("north",null);
-            put("east",bathroom2);
-            put("south",stairs);
-            put("west",null);
-        }});
+        stage.attachRoom(kitchen,"east", livingRoom);        
         
-        bathroom2.setExits(new HashMap<String,Room>(){{
-            put("north",null);
-            put("east",null);
-            put("south",null);
-            put("west",bedroom);
-        }});
-
-        currentRoom = outside;  // start game outside
+        stage.attachRoom(bedroom, "east", bathroom2);
+        stage.attachRoom(bedroom, "south", stairs);
+        
+        Player zuul = stage.getPlayer();
+        zuul.setCurrentRoom(outside);
+        zuul.setDirection("north");
+        
+        return stage;
     }
 
     /**
@@ -128,7 +96,7 @@ public class Game
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        //System.out.println("Thank you for playing.  Good bye.");
+        System.out.println("Game Over");
     }
 
     /**
@@ -171,24 +139,11 @@ public class Game
         // Exit the game
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
-        }
-        //look around (change side)
-        else if (commandWord.equals("look")){
-            look();
-        }
-
+        }        
         return wantToQuit;
     }
 
     //TODO: change everything from this point
-    
-    /**
-     * get description again
-     * 
-     */
-    private void look(){
-        System.out.println(currentRoom.getLongDescription());
-    }
     
     // implementations of user commands:
 
@@ -221,9 +176,33 @@ public class Game
 
         // Try to leave current room.
         Room nextRoom = null;       
-        nextRoom = currentRoom.getExit(direction);
+        //        nextRoom = currentRoom.getExit(direction);
 
         if (nextRoom == null) {
+            System.out.println("There is no door!");
+        }
+        else {
+            //            currentRoom = nextRoom;
+            printLocationInfo();
+        }
+    }
+
+    /**
+     * Change player's direction
+     */
+    private void look(Command command) 
+    {
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("Look where?");
+            return;
+        }
+
+        String direction = command.getSecondWord();
+
+        currentStage.getPlayer().setDirection(direction);
+        
+        if (currentstage == null) {
             System.out.println("There is no door!");
         }
         else {
@@ -231,7 +210,7 @@ public class Game
             printLocationInfo();
         }
     }
-
+    
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.

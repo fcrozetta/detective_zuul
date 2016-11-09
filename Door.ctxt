@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.params=id\ description
+comment0.target=Door(int,\ java.lang.String)
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ Door\n
+comment1.params=room1\ room2
+comment1.target=void\ linkRooms(Room,\ Room)
+comment1.text=\n\ LinkRooms\n\ \n\ @param\ room1\ The\ first\ room\ you'll\ link\n\ @param\ room2\ The\ second\ room\ you'll\ link\n
+comment2.params=currentRoom
+comment2.target=Room\ getOtherRoom(Room)
+comment2.text=\n\ returns\ the\ next\ room\n\ \n\ @return\ The\ room\ which\ tou\ are\ not\ passing\n
+numComments=3

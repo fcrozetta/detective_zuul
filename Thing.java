@@ -26,7 +26,7 @@ public class Thing
      * 
      * @return     id of the object
      */
-    public int getId()
+    protected int getId()
     {
         return this.id;
     }
@@ -36,7 +36,7 @@ public class Thing
      * 
      * @param description The description
      */
-    public void setDescription(String description){
+    protected void setDescription(String description){
         this.description = description;
     }
     
@@ -45,7 +45,26 @@ public class Thing
      * 
      * @return     description of the thing
      */
-    public String getDescription(){
+    protected String getDescription(){
         return this.description;
     }
+    
+    /**
+     * Return the opposite direction
+     * 
+     * @param direction you want the opposite
+     * 
+     * @return The opposite direction
+     */
+    protected String getOppositeDirection(String direction){
+        switch (direction){
+            case "north":return "south";
+            case "south":return "north";
+            case "east": return "west";
+            case "west": return "east";
+            case "up"  : return "down";
+            case "down": return "up";
+        }
+        return null;
+    }    
 }

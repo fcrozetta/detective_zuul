@@ -18,7 +18,7 @@ public class Hinge extends Thing
     {
         super(id,description);
         this.isLocked = false;
-        this.isOpen = false;
+        this.isOpen = true;
         this.keyId = 0;
     }
     
@@ -51,5 +51,12 @@ public class Hinge extends Thing
             this.isOpen = !this.isOpen;
             return true;
         }
-    }    
+    } 
+    
+    /**
+     * returns true if its open
+     */
+    public boolean getIsOpen(){
+        return this.isOpen;
+    }
 }

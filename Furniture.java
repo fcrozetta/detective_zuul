@@ -30,9 +30,9 @@ public class Furniture extends Hinge
     /**
      * removes object
      */
-    public remove(Thing thing){
+    public void remove(Thing thing){
         for(Thing t:insideItems){
-            if(t.equals(Thing)){
+            if(t.equals(thing)){
                 insideItems.remove(t);
             }
         }
