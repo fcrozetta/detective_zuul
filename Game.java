@@ -1,4 +1,6 @@
 import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.HashSet;
 /**
  *  This class is the main class of the "Detective Zuul" application. 
  *  "Detective Zuul" is a game based on "World of Zuul", created by Michael Kölling and David J. Barnes.
@@ -24,61 +26,25 @@ public class Game
     public Game() 
     {
         parser = new Parser();
-        currentStage = createStage();
+        currentStage=null;
     }
 
-    private void printLocationInfo(){
-        System.out.println("no description.. fix this");
+    /**
+     * Load the game
+     * 
+     */
+    public void loadGame(){
+        this.currentStage = LoadSave.loadZuul();
     }
     
     /**
-     * Create all the rooms,furniture,items, and link their exits together.
+     * Print everything on the player's view
      */
-    private Stage createStage()
-    {   
-        /*
-         * Case:
-         * The murder gets inside the home breaking the glass on the front door, 
-         * He hears the bathtub sound upstairs,
-         * goes to the kitchen and grab a knife.
-         * He goes upstairs, goes to her bedroom, she tries to run but he cuts her leg.
-         * she locks herself on the bathroom inside her bedroom, and bleeds out and fall inside the tub
-         * The robber takes her jewlery and money on her purse, then  goes downstairs and hides the knife under the stairs,
-         * then he goes away using the front door
-         * 
-         */
+    private void printLocationInfo(){
+        for(String s : currentStage.getView()){
+            System.out.println(s);
+        }
         
-        Stage stage = new Stage(1,"there was a murder in this house. you need to figure out what happened");
-        //creating rooms
-        Room outside = stage.createRoom("Outside of the house. Not a big house.\nThere is a broken glass on the front door");
-        Room livingRoom = stage.createRoom("The living room.\nYou can see a chandelier up above, and a large table in front of you.\nthere is one plate ont the table");
-        Room kitchen = stage.createRoom("The kitchen.\nYou can see a stove.\nYou can sense the smell of burning on the stove");
-        Room bathroom = stage.createRoom("The bathroom.\nYou can see that nothing was touched here.\nlooks like nothing happened here");
-        Room stairs = stage.createRoom("The stairs.\nthe stairs are made of wood.\nYou can see a loose step");
-        Room bedroom = stage.createRoom("The bedroom.\nYou can see a trail of blood leading to the bedroom's bathroom.\nThere is a purse open up on the bed.\nThe drawers are open and some objects are missing.");
-        Room bathroom2 = stage.createRoom("The bathroom.\nThis bathroom is covered in blood and you can see a corpse inside the tub.\nshe has a deep cut on her leg");
-        
-        stage.attachRoom(outside, "north", livingRoom);
-        
-        stage.attachRoom(livingRoom,"north",stairs);
-        stage.attachRoom(livingRoom,"east",bathroom);
-        stage.attachRoom(livingRoom,"west",kitchen);
-        
-        stage.attachRoom(stairs, "north", bedroom);
-        stage.attachRoom(stairs, "south", livingRoom);
-        
-        stage.attachRoom(bathroom, "south", livingRoom);
-        
-        stage.attachRoom(kitchen,"east", livingRoom);        
-        
-        stage.attachRoom(bedroom, "east", bathroom2);
-        stage.attachRoom(bedroom, "south", stairs);
-        
-        Player zuul = stage.getPlayer();
-        zuul.setCurrentRoom(outside);
-        zuul.setDirection("north");
-        
-        return stage;
     }
 
     /**
@@ -86,17 +52,21 @@ public class Game
      */
     public void play() 
     {            
-        printWelcome();
-
-        // Enter the main command loop.  Here we repeatedly read commands and
-        // execute them until the game is over.
-                
-        boolean finished = false;
-        while (! finished) {
-            Command command = parser.getCommand();
-            finished = processCommand(command);
+        if(this.currentStage.equals(null)){
+            System.out.println("OOPS, its wrong.. do not do this again");
+        }else{
+            printWelcome();
+    
+            // Enter the main command loop.  Here we repeatedly read commands and
+            // execute them until the game is over.
+                    
+            boolean finished = false;
+            while (! finished) {
+                Command command = parser.getCommand();
+                finished = processCommand(command);
+            }
+            System.out.println("Game Over");
         }
-        System.out.println("Game Over");
     }
 
     /**
@@ -105,8 +75,9 @@ public class Game
     private void printWelcome()
     {
         System.out.println();
-        System.out.println("This is not world of zuul");
-        System.out.println("You are the detective here. please find out what happened");
+        System.out.println("Detective Zuul");
+        System.out.println("You are Zuul. A detective in somewhereland city.");
+        System.out.println("Police departament calls you when the crime commited looks like unaswered.");
         System.out.println("Type 'help' if you need help.");
         System.out.println();
         printLocationInfo();
@@ -154,7 +125,7 @@ public class Game
      */
     private void printHelp() 
     {
-        System.out.println("You are a detective at a crime scene.");
+        System.out.println("You are at the crime scene.");
         System.out.println("Find out how the murder was done (or not. this is not functional yet)");
         System.out.println();        
         System.out.println(parser.showCommands());
@@ -175,16 +146,16 @@ public class Game
         String direction = command.getSecondWord();
 
         // Try to leave current room.
-        Room nextRoom = null;       
+        //Room nextRoom = null;       
         //        nextRoom = currentRoom.getExit(direction);
 
-        if (nextRoom == null) {
-            System.out.println("There is no door!");
-        }
-        else {
-            //            currentRoom = nextRoom;
-            printLocationInfo();
-        }
+        //if (nextRoom == null) {
+        //    System.out.println("There is no door!");
+        //}
+        //else {
+        //    //            currentRoom = nextRoom;
+        //    printLocationInfo();
+        //}
     }
 
     /**
@@ -192,23 +163,14 @@ public class Game
      */
     private void look(Command command) 
     {
+        //TODO: Fix this methos
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
             System.out.println("Look where?");
             return;
         }
 
-        String direction = command.getSecondWord();
-
-        currentStage.getPlayer().setDirection(direction);
-        
-        if (currentstage == null) {
-            System.out.println("There is no door!");
-        }
-        else {
-            currentRoom = nextRoom;
-            printLocationInfo();
-        }
+        String direction = command.getSecondWord();                   
     }
     
     /** 

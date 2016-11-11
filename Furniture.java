@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class Furniture extends Hinge
 {
-    private ArrayList<Thing> insideItems;
+    private ArrayList<Thing> allObjects;
     
     /**
      * Constructor for objects of class Furniture
@@ -24,16 +24,16 @@ public class Furniture extends Hinge
      * @param thing an object
      */
     public void add(Thing thing){
-        this.insideItems.add(thing);
+        this.allObjects.add(thing);
     }
     
     /**
      * removes object
      */
     public void remove(Thing thing){
-        for(Thing t:insideItems){
+        for(Thing t:allObjects){
             if(t.equals(thing)){
-                insideItems.remove(t);
+                this.allObjects.remove(t);
             }
         }
     }
