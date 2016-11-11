@@ -28,21 +28,7 @@ public class Room extends Thing
     {
         
         super(id,description);
-        sides = new HashMap<String,Side>();
-        
-        Side north = new Side(1,"north");
-        Side south = new Side(2,"south");
-        Side east = new Side(3,"east");
-        Side west = new Side(4,"west");
-        Side up = new Side(5,"ceiling");
-        Side down = new Side(6,"floor");        
-        
-        this.sides.put("north",north);
-        this.sides.put("south",south); 
-        this.sides.put("east",east);
-        this.sides.put("west",west);
-        this.sides.put("up",up);
-        this.sides.put("down",down);
+        sides = new HashMap<String,Side>();                
     }              
     
     
@@ -55,6 +41,16 @@ public class Room extends Thing
         return sides.get(direction);
     }
     
+    /**
+     * Set every side of the room
+     * 
+     * @param direction the direction inside the room
+     * @param side  the object to be placed on that side
+     */
+    public void setSide(String direction, Side side){
+        this.sides.put(direction,side);        
+    }
+        
     
 
 }

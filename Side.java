@@ -26,7 +26,7 @@ public class Side extends Thing
      * @param id    id of the object
      * @return      Thing object or null
      */
-    public Thing get(int id){
+    public Thing getThing(int id){
         for (Thing t:allObjects){
             if(t.getId() == id){
                 return t;
@@ -40,7 +40,7 @@ public class Side extends Thing
      * 
      * @param thing an object
      */
-    protected void addThing(Thing thing){
+    protected void addThing(Thing thing){        
         this.allObjects.add(thing);
     }
     
@@ -56,6 +56,7 @@ public class Side extends Thing
             }
         }
     }
+    
     /**
      * Return true if has a door attached
      * 
@@ -68,5 +69,15 @@ public class Side extends Thing
             }
         }
         return false;
+    }
+    
+    /**
+     * return every object in this Side
+     * 
+     * @return arrayList of Thing (returns Side.allObjects)
+     * 
+     */
+    public ArrayList<Thing> getObjects(){
+        return this.allObjects;
     }
 }
