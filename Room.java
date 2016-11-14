@@ -15,8 +15,7 @@ import java.util.HashMap;
  */
 public class Room extends Thing
 {
-    private HashMap<String,Side> sides;
-    private Side north, south, east, west, up, down;
+    private HashMap<String,Side> sides;    
     
     /**
      * Create a room described "description". 

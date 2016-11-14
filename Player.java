@@ -1,36 +1,68 @@
 
 /**
- * Create a new player.
- * In this project, it will create Zuul
+ * Creates a player
  * 
  * @author Fernando H. Crozetta
  * @version 0.0.1
  */
-public class Player extends Character
+public class Player
 {
     // instance variables - replace the example below with your own
-    private Room currentRoom;
+    private int currentRoom;  
     private String direction;
-
+    
     /**
      * Constructor for objects of class Player
      */
-    public Player(int id, String description)
+    public Player()
     {
         // initialise instance variables
-        super(id,description);
-        currentRoom = null;
+        currentRoom=1;
         direction="north";
     }
-
+    
+    /**
+     * If the player type left or right, we needd to know which side it is
+     */
+    private String LeftRight(String leftRight){
+        String left,right;
+        switch(this.getDirection()){
+            case "north":
+                left="west";right="east";
+                break;
+            case "south":
+                left="east";right="west";
+                break;
+            case "east":
+                left="south";right="north";
+                break;
+            case "west":
+                left="north";right="south";
+                break;
+            default:
+                left=this.getDirection();right=this.getDirection();
+                break;
+            }
+        if(leftRight.toLowerCase().equals("left")){
+            return left;
+        }else if(leftRight.toLowerCase().equals("right")){
+            return right;
+        }else{
+            return this.getDirection();
+        }
+    }
+    
     /**
      * Set player direction, inside the room
      * 
      * @param direction direction where player is faced
      */
     public void setDirection(String direction){
+        if(direction.toLowerCase().equals("left") || direction.toLowerCase().equals("right") ){
+            direction = this.LeftRight(direction);
+        }
         this.direction = direction;
-    }
+    }        
     
     /**
      * returns the direction
@@ -44,22 +76,14 @@ public class Player extends Character
      * 
      * @param room room where zuul is
      */
-    public void setCurrentRoom(Room room){
+    public void setCurrentRoom(int room){
         this.currentRoom = room;
     }
     
     /**
      * get player currentRoom
      */
-    public Room getCurrentRoom(){
+    public int getCurrentRoom(){
         return this.currentRoom;
-    }
-    
-    /**
-     * Return the Player actual view
-     * 
-     */
-    public Side getcurrentView(){
-        return this.currentRoom.getSide(this.direction);
     }
 }

@@ -36,7 +36,7 @@ public class Game
     public void loadGame(){
         this.currentStage = LoadSave.loadZuul();
     }
-    
+
     /**
      * Print everything on the player's view
      */
@@ -77,7 +77,7 @@ public class Game
         System.out.println();
         System.out.println("Detective Zuul");
         System.out.println("You are Zuul. A detective in somewhereland city.");
-        System.out.println("Police departament calls you when the crime commited looks like unaswered.");
+        System.out.println("Police departament calls you when the crime commited is unaswered.");
         System.out.println("Type 'help' if you need help.");
         System.out.println();
         printLocationInfo();
@@ -110,7 +110,10 @@ public class Game
         // Exit the game
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
-        }        
+        }
+        else if (commandWord.equals("look") {
+            look(command);
+        }
         return wantToQuit;
     }
 

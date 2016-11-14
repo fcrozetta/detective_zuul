@@ -16,7 +16,7 @@ public class Side extends Thing
     public Side(int id, String description)
     {
         super(id,description);
-        ArrayList<Thing> allObjects = new ArrayList<Thing>();
+        this.allObjects = new ArrayList<Thing>();
 
     }    
     
