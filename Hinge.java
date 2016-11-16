@@ -14,9 +14,9 @@ public class Hinge extends Thing
     /**
      * Constructor for objects of class Hinge
      */
-    public Hinge(int id, String description)
+    public Hinge(int id, String name, String description)
     {
-        super(id,description);
+        super(id,name,description);
         this.isLocked = false;
         this.isOpen = true;
         this.keyId = 0;

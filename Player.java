@@ -5,7 +5,7 @@
  * @author Fernando H. Crozetta
  * @version 0.0.1
  */
-public class Player
+public class Player extends Character
 {
     // instance variables - replace the example below with your own
     private int currentRoom;  
@@ -17,6 +17,7 @@ public class Player
     public Player()
     {
         // initialise instance variables
+        super();
         currentRoom=1;
         direction="north";
     }

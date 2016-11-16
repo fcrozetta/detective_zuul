@@ -111,7 +111,7 @@ public class Game
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
-        else if (commandWord.equals("look") {
+        else if (commandWord.equals("look")) {
             look(command);
         }
         return wantToQuit;

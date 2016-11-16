@@ -1,6 +1,6 @@
 #BlueJ class context
-comment0.params=id\ description
-comment0.target=Room(int,\ java.lang.String)
+comment0.params=id\ name\ description
+comment0.target=Room(int,\ java.lang.String,\ java.lang.String)
 comment0.text=\n\ Create\ a\ room\ described\ "description".\ \n\ Initially,\ it\ has\ no\ sides.\ "description"\ is\ something\ like\ "It's\ a\ Dark\ room".\n\ The\ room's\ description\ should\ be\ an\ easy\ way\ to\ know\ what\ the\ room\ is\ like,\ looking\ from\ outside,and\ to\ help\ to\ design\ the\ graphic\ version\n\ @param\ description\ The\ room's\ description.\n
 comment1.params=direction
 comment1.target=Side\ getSide(java.lang.String)

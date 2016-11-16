@@ -1,5 +1,5 @@
 #BlueJ class context
-comment0.params=id\ description
-comment0.target=Character(int,\ java.lang.String)
+comment0.params=
+comment0.target=Character()
 comment0.text=\n\ Constructor\ for\ objects\ of\ class\ Character\n
 numComments=1

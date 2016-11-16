@@ -70,14 +70,14 @@ public class Stage
     public int createRoom(String description){
         int tmpId = this.getNewId();
         
-        Room tmpRoom = new Room(tmpId,description);
+        Room tmpRoom = new Room(tmpId, "Room_"+tmpId , description);
         
-        Side north = new Side(this.getNewId(),"north Side");
-        Side south = new Side(this.getNewId(),"south Side");
-        Side east = new Side(this.getNewId(),"east Side");
-        Side west = new Side(this.getNewId(),"west Side");
-        Side up = new Side(this.getNewId(),"ceiling");
-        Side down = new Side(this.getNewId(),"floor");
+        Side north = new Side(this.getNewId(), "wall", "north Side");
+        Side south = new Side(this.getNewId(), "wall", "south Side");
+        Side east = new Side(this.getNewId(), "wall", "east Side");
+        Side west = new Side(this.getNewId(), "wall", "west Side");
+        Side up = new Side(this.getNewId(), "ceiling", "ceiling");
+        Side down = new Side(this.getNewId(), "floor", "floor");
         
         tmpRoom.setSide("north", north);
         tmpRoom.setSide("south", south);
@@ -108,7 +108,7 @@ public class Stage
         Room newRoom = (Room)this.getThing(destination);
         if( !currentRoom.getSide(direction).hasDoor() && !newRoom.getSide(getOppositeDirection(direction)).hasDoor() ){            
             allObjects.add(newRoom);
-            Door newDoor = new Door(this.getNewId(),"Door");
+            Door newDoor = new Door(this.getNewId(),"Door","common Door");
             newDoor.linkRooms(currentRoom,newRoom);
             currentRoom.getSide(direction).addThing(newDoor);
             newRoom.getSide(getOppositeDirection(direction)).addThing(newDoor);
@@ -124,17 +124,17 @@ public class Stage
      * 
      * @return id id of the item created
      */
-    public int createThing(int room, String direction, String description,String type){
+    public int createThing(int room, String direction, String name, String description,String type){
         Room tmpRoom = (Room)this.getThing(room);
         Side tmpSide = tmpRoom.getSide(direction);
         Thing tmpThing = null;
         int tmpId=this.getNewId();
         switch (type.toLowerCase()){            
             case "item":
-                tmpThing = new Thing(tmpId,description);
+                tmpThing = new Thing(tmpId, name, description);
                 break;
             case "furniture":
-                tmpThing = new Furniture(tmpId,description);
+                tmpThing = new Furniture(tmpId, name, description);
                 break;
         }
         this.allObjects.add(tmpThing);
@@ -152,7 +152,7 @@ public class Stage
         Side tmpSide = tmpRoom.getSide( player.getDirection() );
         ArrayList<String> tmpReturn = new ArrayList<>();
         for( Thing t: tmpSide.getObjects() ){
-            tmpReturn.add(t.getDescription());
+            tmpReturn.add(t.getName());
         }
         return tmpReturn;
     }

@@ -13,9 +13,9 @@ public class Side extends Thing
     /**
      * Constructor for objects of class Side
      */
-    public Side(int id, String description)
+    public Side(int id,String name, String description)
     {
-        super(id,description);
+        super(id, name, description);
         this.allObjects = new ArrayList<Thing>();
 
     }    

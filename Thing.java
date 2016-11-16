@@ -10,14 +10,16 @@
 public class Thing
 {
     private int id;              // Id to knkow my objects
+    private String name;
     private String description;     // Description of this thing
 
     /**
      * Constructor for objects of class Thing
      */
-    public Thing(int id,String description)
+    public Thing(int id,String name, String description)
     {
         this.id = id;
+        this.name = name;
         this.description = description;
     }
 
@@ -49,6 +51,14 @@ public class Thing
         return this.description;
     }       
     
+    /**
+     * Return the name of the Thing
+     * 
+     * @return name name f the Object
+     */
+    protected String getName(){
+        return this.name;
+    }
     
     
 }

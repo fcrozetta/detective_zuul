@@ -12,9 +12,9 @@ public class Furniture extends Hinge
     /**
      * Constructor for objects of class Furniture
      */
-    public Furniture(int id,String description)
+    public Furniture(int id, String name, String description)
     {
-        super(id,description);
+        super(id, name, description);
         ArrayList<Thing> insideItems = new ArrayList<Thing>();
     }
     

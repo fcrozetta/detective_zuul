@@ -13,9 +13,9 @@ public class Door extends Hinge
     /**
      * Constructor for objects of class Door
      */
-    public Door(int id, String description)
+    public Door(int id, String name, String description)
     {
-        super(id,description);
+        super(id, name, description);
         this.room1 = null;
         this.room2 = null;
     }

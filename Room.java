@@ -23,10 +23,10 @@ public class Room extends Thing
      * The room's description should be an easy way to know what the room is like, looking from outside,and to help to design the graphic version
      * @param description The room's description.
      */
-    public Room(int id, String description) 
+    public Room(int id, String name, String description) 
     {
         
-        super(id,description);
+        super(id, name, description);
         sides = new HashMap<String,Side>();                
     }              
     
