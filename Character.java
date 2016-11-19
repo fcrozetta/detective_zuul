@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 /**
  * This sets common fields between players and NPCs
  * 
@@ -16,6 +17,22 @@ public class Character{
     {
         // initialise instance variables
         this.bag = new ArrayList<Item>();
+    }
+    
+    /**
+     * remove Item from bag
+     * 
+     * @param id if the Item
+     */
+    public void removeItem(int id){
+        Iterator<Item> iter = this.bag.iterator();        
+        while (iter.hasNext()) {
+            Item i = iter.next();
+        
+            if (i.getId() == id){
+                iter.remove();
+            }
+        }
     }
     
     /**

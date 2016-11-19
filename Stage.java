@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+
 /**
  * Stage Contains everything the level needs to work
  * 
@@ -223,14 +225,15 @@ public class Stage
      * 
      * @return the id of the furniture
      */
-    public int createFurniture(int room, String direction, String name, String description,boolean isOpen,boolean isLocked){
+    public int createFurniture(int room, String direction, String name, String description,boolean isOpen,boolean isLocked,int keyId){
         Room tmpRoom = (Room)this.getThing(room);
         Side tmpSide = tmpRoom.getSide(direction);
         Furniture tmpThing = null;
         int tmpId=this.getNewId();
-        tmpThing = new Furniture(tmpId,name,description);
+        tmpThing = new Furniture(tmpId,name,description);        
         tmpThing.setIsLocked(isLocked);
         tmpThing.setIsOpen(isOpen);
+        tmpThing.setKeyId(keyId);
         this.allObjects.add(tmpThing);
         tmpSide.addThing(tmpThing);
         return tmpId;
@@ -368,11 +371,19 @@ public class Stage
     protected void removePlayerViewThing(String name){
         Room tmpRoom = (Room) this.getThing(this.player.getCurrentRoom() );
         Side tmpSide = tmpRoom.getSide( player.getDirection() );        
-        for (Thing t: tmpSide.getObjects()){
-            if( t.getName().equals(name)){                    
-                tmpSide.remove(t.getId());
+        Iterator<Thing> iter = tmpSide.getObjects().iterator();
+        while (iter.hasNext()) {
+            Thing t = iter.next();       
+            if (t.getName().equals(name)){
+                iter.remove();
             }
         }
+
+        /*for (Thing t: tmpSide.getObjects()){
+            if( t.getName().equals(name)){                    
+                tmpSide.removeItem(t.getId());
+            }
+        }*/
     }
     
     /**
@@ -412,7 +423,7 @@ public class Stage
      * 
      * @param name of the Item
      */
-    public void playerPickItem(String name){
+    public void playerPickItem(String name){        
         Item item = null;
         for(Thing t: this.allObjects){
             if(t.getName().equals(name)){
@@ -464,5 +475,29 @@ public class Stage
                 this.player.pickItem(i);
             }
         }
+    }
+    
+    /**
+     * Player uses an Item in some Hinge object
+     */
+    public boolean playerUseItem(String bag_item, String view_thing){
+        Item item = null;
+        Thing thing = null;
+        for(Item i : this.player.getObjects()){
+            if(i.getName().equals(bag_item)){
+                item=i;
+            }
+        }
+        thing = this.getPlayerViewThing(view_thing);
+        if(item !=null && thing!=null){
+            if(thing instanceof Hinge){
+                Hinge h = (Hinge)thing;
+                if(h.unlock(item.getId())){
+                    this.player.removeItem(item.getId());
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }    

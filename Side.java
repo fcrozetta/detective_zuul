@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 /**
  * This class creates a wall, where the objects, doors, and furnitures will be placed.
  * 
@@ -65,10 +66,13 @@ public class Side extends Thing
      * 
      * @param id id of the object to remove
      */
-    protected void remove(int id){
-        for(Thing t:allObjects){
-            if(t.getId() == id){
-                this.allObjects.remove(t);
+    protected void removeItem(int id){
+        //cannot remove from list while iterating in my usual way;
+        Iterator<Thing> iter = this.allObjects.iterator();
+        while (iter.hasNext()) {
+            Thing t = iter.next();            
+            if (t.getId() == id){
+                iter.remove();
             }
         }
     }

@@ -45,6 +45,7 @@ public class LoadSave
         stage.setRoomSideDescription(outside, "west", "I can see bushes separating this house from the neighbour");
         stage.setRoomSideDescription(outside, "up", "It's a sunny day.");
         stage.setRoomSideDescription(outside, "down", "The pavement...");
+        int stove_key = stage.createItem(outside, "north", "small_key", "It's a small,silver key");
         
         int livingRoom = stage.createRoom("Living Room","The first room of the house.");
         stage.setRoomSideDescription(livingRoom, "north", "There is a table in front of me");
@@ -69,7 +70,7 @@ public class LoadSave
         stage.createStaticItem(kitchen, "west", "sink", "Empty, Clean.... nothing like my flat");
         stage.createStaticItem(kitchen, "north", "refrigerator", "mmmmm not hungry enough to open a refrigerator of the crime scene");
         stage.createStaticItem(kitchen, "north", "microwave", "Looks like a brand new microwave");
-        int stove = stage.createFurniture(kitchen, "south", "stove", "The stove is cold, but i can sense the smell of burning... ", false, false);
+        int stove = stage.createFurniture(kitchen, "south", "stove", "The stove is cold, but i can sense the smell of burning... ", false, true,stove_key);
         int bedroomKey = stage.createFurnitureItem(stove, "gold_key", "Looks like someone tried to melt this key... i wonder why");
         //HERE
         int bathroom = stage.createRoom("Bathroom","You can see that nothing was touched here.\nlooks like nothing happened here");

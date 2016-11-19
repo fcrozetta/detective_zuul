@@ -136,6 +136,9 @@ public class Game
         else if (commandWord.equals("loot")){
             loot(command);
         }
+        else if (commandWord.equals("use")){
+            use(command);
+        }
         return wantToQuit;
     }
 
@@ -266,6 +269,27 @@ public class Game
         }
         String furniture = command.getSecondWord();
         currentStage.playerGetFurnitureItems(furniture);
+    }
+    
+    /**
+     * Use bag item into other objectin visible(not in bag)
+     */
+    private void use(Command command){
+        if(!command.hasSecondWord()){
+            System.out.println("Use what?");
+            return;
+        }
+        if(!command.hasThirdWord()){
+            System.out.println("Use "+command.getSecondWord()+" where?");
+            return;
+        }
+        String item = command.getSecondWord();
+        String object = command.getThirdWord();
+        if(currentStage.playerUseItem(item,object)){
+            System.out.println("It worked!");
+        }else{
+            System.out.println("Well... that's not how i should use it");
+        }
     }
     
     /** 

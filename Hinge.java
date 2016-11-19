@@ -41,6 +41,14 @@ public abstract class Hinge extends Interactive
     }
     
     /**
+     * set keyId to unlock
+     * 
+     * @param id of the key
+     */
+    protected void setKeyId(int id){
+        this.keyId = id;
+    }
+    /**
      * Tries to unlock the object with the id of the key
      * 
      * @param key   id of the key to unlock the furniture
