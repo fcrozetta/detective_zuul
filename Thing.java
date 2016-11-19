@@ -2,7 +2,6 @@
 /**
  * Thing class contains everything all game objects should have.
  * It's called Thing, because "Object" wa already taken.
- * In theory, this should create items to be put inside the detective's inventory.
  * 
  * @author Fernando H. Crozetta 
  * @version 0.0.1

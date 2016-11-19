@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class Furniture extends Hinge
 {
-    private ArrayList<Thing> allObjects;
+    private ArrayList<Item> allObjects;
     
     /**
      * Constructor for objects of class Furniture
@@ -15,26 +15,50 @@ public class Furniture extends Hinge
     public Furniture(int id, String name, String description)
     {
         super(id, name, description);
-        ArrayList<Thing> insideItems = new ArrayList<Thing>();
+        this.allObjects = new ArrayList<Item>();
     }
     
     /**
      * Add object
      * 
-     * @param thing an object
+     * @param Item - item
      */
-    public void add(Thing thing){
-        this.allObjects.add(thing);
+    public void addItem(Item item){
+        this.allObjects.add(item);
     }
     
     /**
      * removes object
      */
-    public void remove(Thing thing){
-        for(Thing t:allObjects){
-            if(t.equals(thing)){
-                this.allObjects.remove(t);
+    public void remove(Item item){
+        for(Item i:allObjects){
+            if(i.equals(item)){
+                this.allObjects.remove(i);
             }
         }
+    }
+    
+    /**
+     * return items
+     * 
+     * @return ArrayList all items
+     */
+    public ArrayList<Item> getObjects(){
+        return this.allObjects;
+    }
+    
+    /**
+     * return every object then remove from this list
+     * 
+     * @return ArrayList all items
+     *     
+     */
+    public ArrayList<Item> getDeleteObjects(){
+        ArrayList<Item> tmp = new ArrayList<Item>();
+        for(Item i: this.allObjects){
+            tmp.add(new Item(i.getId(),i.getName(),i.getDescription()));
+        }
+        this.allObjects.clear();
+        return tmp;
     }
 }

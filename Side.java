@@ -36,6 +36,22 @@ public class Side extends Thing
     }
     
     /**
+     * Return the id of THing, based on name
+     * 
+     * @param name of the Thing
+     * 
+     * @return id of the Thing
+     */
+    public int getThingId(String name){
+        for( Thing t: this.allObjects ){
+            if(t.getName().equals(name)){
+                return t.getId();
+            }
+        }
+        return -1;
+    }
+    
+    /**
      * Add new Thing to the array
      * 
      * @param thing an object

@@ -5,7 +5,7 @@
  * @author Fernando H. Crozetta 
  * @version 0.0.1
  */
-public class Hinge extends Thing
+public abstract class Hinge extends Interactive
 {
     private boolean isLocked;
     private boolean isOpen;
@@ -23,6 +23,24 @@ public class Hinge extends Thing
     }
     
     /**
+     * Set isLocked
+     * 
+     * @param boolean isLocked
+     */
+    protected void setIsLocked(boolean isLocked){
+        this.isLocked = isLocked;
+    }
+    
+    /**
+     * Set isOpen
+     * 
+     * @param boolean isOpen
+     */
+    protected void setIsOpen(boolean isOpen){
+        this.isOpen = isOpen;
+    }
+    
+    /**
      * Tries to unlock the object with the id of the key
      * 
      * @param key   id of the key to unlock the furniture
@@ -37,6 +55,15 @@ public class Hinge extends Thing
             }
         }
         return false;
+    }
+    
+    /**
+     * Return the state of the lock
+     * 
+     * @return true if it's locked
+     */
+    public boolean getIsLocked(){
+        return this.isLocked;
     }
     
     /**
@@ -58,5 +85,27 @@ public class Hinge extends Thing
      */
     public boolean getIsOpen(){
         return this.isOpen;
+    }
+    
+    /**
+     * Hinge description includes open/close and locked/unlocked
+     * 
+     * @return description
+     */
+    protected String getDescription(){
+        String tmp;
+        if(this.isLocked){
+            tmp = "Locked";
+        }else{
+            tmp=this.isOpen?"open":"closed";
+        }
+        return super.getDescription() + "\nIt's "+tmp ;
+    }
+    
+    /**
+     * Action to perform when something interacts with it
+     */
+    protected boolean action(){
+        return this.open();
     }
 }

@@ -18,8 +18,8 @@ public class Player extends Character
     {
         // initialise instance variables
         super();
-        currentRoom=1;
-        direction="north";
+        this.currentRoom=1;
+        this.direction="north";
     }
     
     /**
@@ -35,10 +35,10 @@ public class Player extends Character
                 left="east";right="west";
                 break;
             case "east":
-                left="south";right="north";
+                left="north";right="south";
                 break;
             case "west":
-                left="north";right="south";
+                left="south";right="north";
                 break;
             default:
                 left=this.getDirection();right=this.getDirection();
@@ -61,6 +61,9 @@ public class Player extends Character
     public void setDirection(String direction){
         if(direction.toLowerCase().equals("left") || direction.toLowerCase().equals("right") ){
             direction = this.LeftRight(direction);
+        }
+        if (direction.toLowerCase().equals("back")){
+            direction = Stage.getOppositeDirection(this.direction);
         }
         this.direction = direction;
     }        
@@ -87,4 +90,6 @@ public class Player extends Character
     public int getCurrentRoom(){
         return this.currentRoom;
     }
+    
+    
 }

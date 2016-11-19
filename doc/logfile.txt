@@ -1,0 +1,43 @@
+Class documentation
+<---- javadoc command: ---->
+/usr/java/jdk1.8.0_111/bin/javadoc
+-author
+-version
+-nodeprecated
+-package
+-noindex
+-notree
+-nohelp
+-nonavbar
+-source
+1.8
+-classpath
+/home/fcrozetta/programs/bluej/lib/bluejcore.jar:/home/fcrozetta/programs/bluej/lib/junit-4.8.2.jar:/home/fcrozetta/programs/bluej/lib/userlib/pi4j-gpio-extension.jar:/home/fcrozetta/programs/bluej/lib/userlib/pi4j-device.jar:/home/fcrozetta/programs/bluej/lib/userlib/pi4j-core.jar:/home/fcrozetta/programs/bluej/lib/userlib/pi4j-service.jar:/home/fcrozetta/bin/detective_zuul
+-d
+/home/fcrozetta/bin/detective_zuul/doc
+-encoding
+UTF-8
+-charset
+UTF-8
+-docletpath
+/home/fcrozetta/programs/bluej/lib/bjdoclet.jar
+-doclet
+bluej.doclet.doclets.formats.html.HtmlDoclet
+/home/fcrozetta/bin/detective_zuul/Stage.java
+<---- end of javadoc command ---->
+Loading source file /home/fcrozetta/bin/detective_zuul/Stage.java...
+Constructing Javadoc information...
+Standard Doclet version 1.8.0_111
+Building tree for all the packages and classes...
+Generating /home/fcrozetta/bin/detective_zuul/doc/Stage.html...
+/home/fcrozetta/bin/detective_zuul/Stage.java:136: warning - @param argument "id" is not a parameter name.
+Generating /home/fcrozetta/bin/detective_zuul/doc/package-frame.html...
+Generating /home/fcrozetta/bin/detective_zuul/doc/package-summary.html...
+Generating /home/fcrozetta/bin/detective_zuul/doc/constant-values.html...
+Building index for all the packages and classes...
+Building index for all classes...
+Generating /home/fcrozetta/bin/detective_zuul/doc/allclasses-frame.html...
+Generating /home/fcrozetta/bin/detective_zuul/doc/allclasses-noframe.html...
+Generating /home/fcrozetta/bin/detective_zuul/doc/index.html...
+Generating /home/fcrozetta/bin/detective_zuul/doc/stylesheet.css...
+1 warning

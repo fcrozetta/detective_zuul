@@ -41,9 +41,16 @@ public class Game
      * Print everything on the player's view
      */
     private void printLocationInfo(){
-        for(String s : currentStage.getView()){
-            System.out.println(s);
+        System.out.println("\t[ " + currentStage.getPlayerCurrentRoomName()+" ]\t");
+        System.out.println(currentStage.getPlayerCurrentRoomDescription());
+        System.out.println("You are looking "+currentStage.getPlayerDirection());
+        System.out.println(currentStage.getPlayerViewSideDescription());        
+        System.out.println("Objects:");
+        for(String s : currentStage.getPlayerViewObjects()){
+            System.out.print(s);
+            System.out.print("\t");
         }
+        System.out.println("");
         
     }
 
@@ -114,6 +121,21 @@ public class Game
         else if (commandWord.equals("look")) {
             look(command);
         }
+        else if (commandWord.equals("examine")){
+            examine(command);
+        }
+        else if(commandWord.equals("pick")){
+            pick(command);
+        }
+        else if(commandWord.equals("bag")){
+            bag();
+        }
+        else if (commandWord.equals("interact")){
+            interact(command);
+        }
+        else if (commandWord.equals("loot")){
+            loot(command);
+        }
         return wantToQuit;
     }
 
@@ -135,45 +157,115 @@ public class Game
     }
 
     /** 
-     * Try to go in one direction. If there is an exit, enter
-     * the new room, otherwise print an error message.
+     * Try to go trhough the door. If there is open, enter
+     * the new room, stay in the same room.
      */
     private void goRoom(Command command) 
     {
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
-            System.out.println("Go where?");
+            System.out.println("Go which door?");
             return;
         }
 
-        String direction = command.getSecondWord();
-
-        // Try to leave current room.
-        //Room nextRoom = null;       
-        //        nextRoom = currentRoom.getExit(direction);
-
-        //if (nextRoom == null) {
-        //    System.out.println("There is no door!");
-        //}
-        //else {
-        //    //            currentRoom = nextRoom;
-        //    printLocationInfo();
-        //}
+        String door = command.getSecondWord();
+        currentStage.playerGoRoom(door);
+        this.printLocationInfo();
     }
 
     /**
-     * Change player's direction
+     * Change where player is looking
      */
     private void look(Command command) 
-    {
-        //TODO: Fix this methos
+    {        
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
-            System.out.println("Look where?");
+            printLocationInfo();
             return;
         }
-
-        String direction = command.getSecondWord();                   
+        String direction = command.getSecondWord();        
+        currentStage.setPlayerDirection(direction);
+        this.printLocationInfo();
+    }
+    
+    /**
+     * Examine objects, returning the description of the Object
+     * 
+     * @param name of the Object
+     * 
+     * @return the description of this thing
+     */
+    private void examine(Command command){
+        if(!command.hasSecondWord()){
+            System.out.println("examine what?");
+            return;
+        }
+        String thing = command.getSecondWord();
+        if ( currentStage.getPlayerViewObjects().contains(thing)){
+            System.out.println("\t[ " + thing + " ]");
+            System.out.println(currentStage.getPlayerViewThingDescription(thing));
+        }        
+    }
+    
+    /**
+     * Pick up an Item
+     * 
+     * @param name of the Thing
+     */
+    private void pick(Command command){
+        if(!command.hasSecondWord()){
+            System.out.println("Pick up what?");
+            return;
+        }
+        
+        String thing = command.getSecondWord();
+        if ( currentStage.getPlayerViewObjects().contains(thing)){
+            currentStage.playerPickItem(thing);
+        }
+        this.printLocationInfo();
+    }
+    
+    /**
+     * Print Player's bag
+     * 
+     */
+    private void bag(){
+        System.out.println("\t [ Bag ]\t");
+        for (String s: currentStage.showPlayerBag()){
+            System.out.print(s);
+            System.out.print("\t");
+        }
+        System.out.println("");
+    }
+    
+    /**
+     * tries to interact with object
+     * 
+     */
+    private void interact(Command command){
+        if(!command.hasSecondWord()){
+            System.out.println("Interact with what?");
+            return;
+        }
+        
+        String thing = command.getSecondWord();
+        
+        if (!currentStage.playerInteract(thing)){
+            System.out.println("not succeed to interact with "+ thing);
+        }
+    }
+    
+    /**
+     * Loot a furniture, picking up everything inside
+     * 
+     */
+    private void loot(Command command){
+        if(!command.hasSecondWord()){
+            System.out.println("Loot what?");
+            return;
+        }
+        String furniture = command.getSecondWord();
+        currentStage.playerGetFurnitureItems(furniture);
     }
     
     /** 

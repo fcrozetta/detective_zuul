@@ -43,5 +43,19 @@ public class Door extends Hinge
             return room1;
         }                
     }
-        
+    
+    /**
+     * Door's description contain the opposite's room description if it's open
+     * 
+     * @return Description
+     */
+    public String getDescription(){
+        //TODO: Change this to see the opposite room
+        if(this.getIsOpen()){
+            return super.getDescription()+"\nAnd you can see the other room";
+        }else{
+            return super.getDescription();
+        }
+    }
+    
 }

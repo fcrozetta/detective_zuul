@@ -49,7 +49,18 @@ public class Room extends Thing
     public void setSide(String direction, Side side){
         this.sides.put(direction,side);        
     }
-        
+    
+    /**
+     * Set Description of the Side
+     * 
+     * @param String direction
+     * @param String description
+     * 
+     */
+    public void setSideDescription(String direction,String description){
+        Side tmpSide = this.getSide(direction);
+        tmpSide.setDescription(description);
+    }
     
 
 }
