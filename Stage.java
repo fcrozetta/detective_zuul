@@ -514,8 +514,10 @@ public class Stage
         Thing t = this.getPlayerViewThing(name);        
         if(t instanceof Furniture){
             Furniture f = (Furniture)t;
-            for(Item i: f.getDeleteObjects()){                
-                this.player.pickItem(i);
+            if (f.getIsOpen()){
+                for(Item i: f.getDeleteObjects()){                
+                    this.player.pickItem(i);
+                }
             }
         }
     }
