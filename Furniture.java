@@ -56,9 +56,22 @@ public class Furniture extends Hinge
     public ArrayList<Item> getDeleteObjects(){
         ArrayList<Item> tmp = new ArrayList<Item>();
         for(Item i: this.allObjects){
-            tmp.add(new Item(i.getId(),i.getName(),i.getDescription()));
+            tmp.add(new Item(i.getId(), i.getName(), i.getDescription()));
         }
         this.allObjects.clear();
         return tmp;
+    }
+    
+    /**
+     * @return description
+     */
+    public String getDescription(){
+        String tmp="";
+        if(this.getIsOpen()){            
+            if(!this.getObjects().isEmpty()){            
+                tmp="\nI can see somthing in there...";
+            }
+        }
+        return super.getDescription() +tmp;
     }
 }

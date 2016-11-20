@@ -48,6 +48,7 @@ public abstract class Hinge extends Interactive
     protected void setKeyId(int id){
         this.keyId = id;
     }
+    
     /**
      * Tries to unlock the object with the id of the key
      * 
@@ -105,7 +106,7 @@ public abstract class Hinge extends Interactive
         if(this.isLocked){
             tmp = "Locked";
         }else{
-            tmp=this.isOpen?"open":"closed";
+          tmp=this.isOpen?"open":"closed";
         }
         return super.getDescription() + "\nIt's "+tmp ;
     }

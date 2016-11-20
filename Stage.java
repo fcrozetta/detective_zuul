@@ -15,6 +15,7 @@ public class Stage
     private Player player;
     private int totalOfObjects;   
     private ArrayList<String> validDirections;
+    private HashMap<String,Item> combinations;
 
     /**
      * Constructor for objects of class Stage
@@ -24,6 +25,7 @@ public class Stage
         this.totalOfObjects=0;
         this.allObjects = new ArrayList<Thing>();
         this.player = new Player();
+        this.combinations = new HashMap<String,Item>();
         this.validDirections=new ArrayList<String>();
         this.validDirections.add("north");
         this.validDirections.add("south");
@@ -36,6 +38,38 @@ public class Stage
         this.validDirections.add("back");
     }
 
+    /**
+     * Add a new combination
+     */
+    public void setCombination(int id1,int id2, int returnItemId){
+        String str = id1+"-"+id2;
+        this.combinations.put(str, (Item)this.getThing(returnItemId));        
+    }
+    
+    /**
+     * Result of combination of Items
+     * 
+     * @param Item item1
+     * @param Item item2
+     * 
+     * @return Item result
+     */
+    public Item getCombination(Item item1, Item item2){
+        Item tmpItem = null;
+        tmpItem = this.combinations.get(item1.getId()+"-"+item2.getId());
+        if(tmpItem == null){
+            tmpItem = this.combinations.get(item2.getId()+"-"+item1.getId());
+        }
+        return tmpItem;
+    }    
+    
+    /**
+     * Set player initial room
+     */
+    public void setPLayerInitialRoom(int id){
+        this.player.setCurrentRoom(id);
+    }
+    
     /**
      * Return the opposite direction
      * 
@@ -394,7 +428,15 @@ public class Stage
      * @return String description
      */
     public String getPlayerViewThingDescription(String name){
-        Thing tmpThing = this.getPlayerViewThing(name);
+        Thing tmpThing = this.getPlayerViewThing(name);        
+        if(tmpThing == null){
+            for(Item i: this.player.getObjects()){
+                if (i.getName().equals(name)){
+                    return i.getDescription();
+                }
+            }
+            return "";
+        }
         return tmpThing.getDescription();
     }
     
@@ -435,6 +477,7 @@ public class Stage
             this.removePlayerViewThing(name);
         }
     }
+    
     /**
      * Shows the player's bag
      * 
@@ -500,4 +543,41 @@ public class Stage
         }
         return false;
     }
+    
+    /**
+     * Player combine items
+     * 
+     * @param string name of the 1st item
+     * @param string name of the 2nd item
+     * 
+     * @return true if succeed
+     */
+    public boolean playerCombineItem(String bag_item1, String bag_item2){
+        Item item1 = null;
+        Item item2 = null;
+        for(Item i : this.player.getObjects()){
+            if(i.getName().equals(bag_item1)){
+                item1=i;
+            }
+        }
+        
+        for(Item i : this.player.getObjects()){
+            if(i.getName().equals(bag_item2)){
+                item2=i;
+            }
+        }
+        
+        if ( (item1 != null) && (item2 != null)){
+            Item tmpItem = this.getCombination(item1, item2);
+            if(tmpItem !=null){
+                this.player.removeItem(item1.getId());
+                this.player.removeItem(item2.getId());
+                this.allObjects.add(new Item(tmpItem.getId(),tmpItem.getName(),tmpItem.getDescription()));
+                this.player.pickItem((Item)this.getThing(tmpItem.getId()));
+                return true;
+            }
+        }
+        return false;
+    }
+
 }    

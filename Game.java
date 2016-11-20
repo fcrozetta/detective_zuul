@@ -41,9 +41,8 @@ public class Game
      * Print everything on the player's view
      */
     private void printLocationInfo(){
-        System.out.println("\t[ " + currentStage.getPlayerCurrentRoomName()+" ]\t");
+        System.out.println("\t[ " + currentStage.getPlayerCurrentRoomName()+" ]"+currentStage.getPlayerDirection());
         System.out.println(currentStage.getPlayerCurrentRoomDescription());
-        System.out.println("You are looking "+currentStage.getPlayerDirection());
         System.out.println(currentStage.getPlayerViewSideDescription());        
         System.out.println("Objects:");
         for(String s : currentStage.getPlayerViewObjects()){
@@ -139,6 +138,9 @@ public class Game
         else if (commandWord.equals("use")){
             use(command);
         }
+        else if (commandWord.equals("combine")){
+            combine(command);
+        }
         return wantToQuit;
     }
 
@@ -204,10 +206,7 @@ public class Game
             return;
         }
         String thing = command.getSecondWord();
-        if ( currentStage.getPlayerViewObjects().contains(thing)){
-            System.out.println("\t[ " + thing + " ]");
-            System.out.println(currentStage.getPlayerViewThingDescription(thing));
-        }        
+        System.out.println(currentStage.getPlayerViewThingDescription(thing));        
     }
     
     /**
@@ -291,6 +290,25 @@ public class Game
             System.out.println("Well... that's not how i should use it");
         }
     }
+    
+    /**
+     * Combine Items
+     */
+    private void combine(Command command){
+        if(!command.hasSecondWord()){
+            System.out.println("Combine what?");
+            return;
+        }
+        if(!command.hasThirdWord()){
+            System.out.println("Combine "+command.getSecondWord()+" with what?");
+            return;
+        }
+        
+        String item1 = command.getSecondWord();
+        String item2 = command.getThirdWord();
+        currentStage.playerCombineItem(item1,item2);
+    }
+        
     
     /** 
      * "Quit" was entered. Check the rest of the command to see
