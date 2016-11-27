@@ -37,17 +37,26 @@ public class LoadSave
         
         Stage stage = new Stage("there was a murder in this house. you need to figure out what happened");
         int shadow = stage.createRoom("This room is not reacheable by the player", "This room stores everything not present in the game now");
-        int stove_key= stage.createItem(shadow, "north", "stove_key", "Complete key of a stove");
+        int hammer = stage.createItem(shadow, "north", "hammer", "It's a home made hammer");
+        int crowbar = stage.createItem(shadow, "north", "crowbar", "This twisted metal bar can be used as a crowbar");
         
-        
-        int outside = stage.createRoom("Outside","It's the outside of the house. It's a big house.");       
+        int outside = stage.createRoom("Outside","It's the outside of the house. It's a big house.");
         stage.setRoomSideDescription(outside, "north", "The entrance of the house.");        
-        stage.setRoomSideDescription(outside, "east", "There is a bush separating this house from the neighbour.");
+        stage.createStaticItem(outside, "north", "window", "I can see a table from here");
+        
+        stage.setRoomSideDescription(outside, "east", "There is a car parked there, and the entrance of the garage.");
+        stage.createStaticItem(outside, "east", "car", "It's a beautiful car... i'm not sure if i should open the door");
+        
         stage.setRoomSideDescription(outside,"south", "There is a tree in front of the house across the street");
+        stage.createStaticItem(outside, "south", "home", "It's the neighbour's home..");
+        
         stage.setRoomSideDescription(outside, "west", "I can see bushes separating this house from the neighbour");
+        int trashCan = stage.createFurniture(outside, "west", "trash_can", "It's the reccycle bin...", false, false, 0);
+        int metal_scrap = stage.createFurnitureItem(outside, "metal_scrap", "It's a metal bar.. this can be usefull");
+        
         stage.setRoomSideDescription(outside, "up", "It's a sunny day.");
+        stage.create
         stage.setRoomSideDescription(outside, "down", "The pavement...");
-        int stove_key_part1 = stage.createItem(outside, "down", "small_key_part1", "It's the half of a small key");
         
         int livingRoom = stage.createRoom("Living Room","The first room of the house.");
         stage.setRoomSideDescription(livingRoom, "north", "There is a table in front of me");
@@ -61,7 +70,6 @@ public class LoadSave
         
         stage.setRoomSideDescription(livingRoom, "west", "There is a picture on the wall");
         int picture1 = stage.createFurniture(livingRoom, "west", "picture", "I can see a blonde girl and a brunette.College friends, maybe?", false, false, 0);
-        int stove_key_part2 = stage.createFurnitureItem(picture1, "small_key_part2", "Half of a small key");
         stage.setCombination(stove_key_part1,stove_key_part2, stove_key);
         stage.setRoomSideDescription(livingRoom, "up", "I can see a chandelier");
         stage.createStaticItem(livingRoom, "up", "chandelier", "It's a nice chandelier... it looks expensive");
