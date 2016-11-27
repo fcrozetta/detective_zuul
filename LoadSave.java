@@ -55,11 +55,11 @@ public class LoadSave
         int metal_scrap = stage.createFurnitureItem(outside, "metal_scrap", "It's a metal bar.. this can be usefull");
         
         stage.setRoomSideDescription(outside, "up", "It's a sunny day.");
-        stage.create
+        stage.createStaticItem(outside, "up", "sun", "Yup... it is the sun");        
         stage.setRoomSideDescription(outside, "down", "The pavement...");
         
-        int livingRoom = stage.createRoom("Living Room","The first room of the house.");
-        stage.setRoomSideDescription(livingRoom, "north", "There is a table in front of me");
+        int livingRoom = stage.createRoom("Living Room","It's a big room..");
+        stage.setRoomSideDescription(livingRoom, "north", "There is a table in front of me, and a corridor");
         stage.createStaticItem(livingRoom, "north", "table", "it's a Huge wooden table.\nThere is a plate on the table... Better not touch it");
         
         stage.setRoomSideDescription(livingRoom, "east", "There is a clock over there!");
@@ -67,6 +67,8 @@ public class LoadSave
         
         stage.setRoomSideDescription(livingRoom, "south", "I can see a coat hanging");
         stage.createStaticItem(livingRoom, "south", "coat", "It's a women's coat.");
+        stage.createStaticItem(livingRoom, "south", "window", "I can see the road, and a house on the other side of the street");
+
         
         stage.setRoomSideDescription(livingRoom, "west", "There is a picture on the wall");
         int picture1 = stage.createFurniture(livingRoom, "west", "picture", "I can see a blonde girl and a brunette.College friends, maybe?", false, false, 0);
