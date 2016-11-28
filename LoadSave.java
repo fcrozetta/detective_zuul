@@ -98,7 +98,8 @@ public class LoadSave
         stage.setRoomSideDescription(bathroom, "west", "there is just the door i came from");
         
         stage.setRoomSideDescription(bathroom, "up", "just the light up here");
-        stage.setRoomSideDescription(bathroom, "down", "looking at my own feet");
+        stage.setRoomSideDescription(bathr
+        oom, "down", "looking at my own feet");
         
         
         
