@@ -1,6 +1,6 @@
 Class documentation
 <---- javadoc command: ---->
-/usr/java/jdk1.8.0_111/bin/javadoc
+/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt/bin/javadoc
 -author
 -version
 -nodeprecated
@@ -12,32 +12,49 @@ Class documentation
 -source
 1.8
 -classpath
-/home/fcrozetta/programs/bluej/lib/bluejcore.jar:/home/fcrozetta/programs/bluej/lib/junit-4.8.2.jar:/home/fcrozetta/programs/bluej/lib/userlib/pi4j-gpio-extension.jar:/home/fcrozetta/programs/bluej/lib/userlib/pi4j-device.jar:/home/fcrozetta/programs/bluej/lib/userlib/pi4j-core.jar:/home/fcrozetta/programs/bluej/lib/userlib/pi4j-service.jar:/home/fcrozetta/bin/detective_zuul
+/usr/share/bluej/bluejcore.jar:/usr/share/bluej/junit-4.8.2.jar:/usr/share/bluej/userlib/pi4j-device.jar:/usr/share/bluej/userlib/pi4j-service.jar:/usr/share/bluej/userlib/pi4j-core.jar:/usr/share/bluej/userlib/pi4j-gpio-extension.jar:/home/pi/bin/detective_zuul
 -d
-/home/fcrozetta/bin/detective_zuul/doc
+/home/pi/bin/detective_zuul/doc
 -encoding
 UTF-8
 -charset
 UTF-8
 -docletpath
-/home/fcrozetta/programs/bluej/lib/bjdoclet.jar
+/usr/share/bluej/bjdoclet.jar
 -doclet
 bluej.doclet.doclets.formats.html.HtmlDoclet
-/home/fcrozetta/bin/detective_zuul/Stage.java
+/home/pi/bin/detective_zuul/Stage.java
 <---- end of javadoc command ---->
-Loading source file /home/fcrozetta/bin/detective_zuul/Stage.java...
+Loading source file /home/pi/bin/detective_zuul/Stage.java...
 Constructing Javadoc information...
-Standard Doclet version 1.8.0_111
+Standard Doclet version 1.8.0_65
 Building tree for all the packages and classes...
-Generating /home/fcrozetta/bin/detective_zuul/doc/Stage.html...
-/home/fcrozetta/bin/detective_zuul/Stage.java:136: warning - @param argument "id" is not a parameter name.
-Generating /home/fcrozetta/bin/detective_zuul/doc/package-frame.html...
-Generating /home/fcrozetta/bin/detective_zuul/doc/package-summary.html...
-Generating /home/fcrozetta/bin/detective_zuul/doc/constant-values.html...
+Generating /home/pi/bin/detective_zuul/doc/Stage.html...
+/home/pi/bin/detective_zuul/Stage.java:262: warning - @param argument "id" is not a parameter name.
+/home/pi/bin/detective_zuul/Stage.java:262: warning - @param argument "String" is not a parameter name.
+/home/pi/bin/detective_zuul/Stage.java:262: warning - @param argument "String" is not a parameter name.
+/home/pi/bin/detective_zuul/Stage.java:262: warning - @param argument "boolean" is not a parameter name.
+/home/pi/bin/detective_zuul/Stage.java:262: warning - @param argument "boolean" is not a parameter name.
+/home/pi/bin/detective_zuul/Stage.java:283: warning - @string is an unknown tag.
+/home/pi/bin/detective_zuul/Stage.java:283: warning - @param argument "int" is not a parameter name.
+/home/pi/bin/detective_zuul/Stage.java:283: warning - @param argument "String" is not a parameter name.
+/home/pi/bin/detective_zuul/Stage.java:219: warning - @param argument "id" is not a parameter name.
+/home/pi/bin/detective_zuul/Stage.java:124: warning - @retun is an unknown tag.
+/home/pi/bin/detective_zuul/Stage.java:124: warning - @param argument "String" is not a parameter name.
+/home/pi/bin/detective_zuul/Stage.java:124: warning - @param argument "String" is not a parameter name.
+/home/pi/bin/detective_zuul/Stage.java:239: warning - @param argument "id" is not a parameter name.
+/home/pi/bin/detective_zuul/Stage.java:57: warning - @param argument "Item" is not a parameter name.
+/home/pi/bin/detective_zuul/Stage.java:57: warning - @param argument "Item" is not a parameter name.
+/home/pi/bin/detective_zuul/Stage.java:557: warning - @param argument "string" is not a parameter name.
+/home/pi/bin/detective_zuul/Stage.java:557: warning - @param argument "string" is not a parameter name.
+/home/pi/bin/detective_zuul/Stage.java:513: warning - @param argument "int" is not a parameter name.
+Generating /home/pi/bin/detective_zuul/doc/package-frame.html...
+Generating /home/pi/bin/detective_zuul/doc/package-summary.html...
+Generating /home/pi/bin/detective_zuul/doc/constant-values.html...
 Building index for all the packages and classes...
 Building index for all classes...
-Generating /home/fcrozetta/bin/detective_zuul/doc/allclasses-frame.html...
-Generating /home/fcrozetta/bin/detective_zuul/doc/allclasses-noframe.html...
-Generating /home/fcrozetta/bin/detective_zuul/doc/index.html...
-Generating /home/fcrozetta/bin/detective_zuul/doc/stylesheet.css...
-1 warning
+Generating /home/pi/bin/detective_zuul/doc/allclasses-frame.html...
+Generating /home/pi/bin/detective_zuul/doc/allclasses-noframe.html...
+Generating /home/pi/bin/detective_zuul/doc/index.html...
+Generating /home/pi/bin/detective_zuul/doc/stylesheet.css...
+18 warnings

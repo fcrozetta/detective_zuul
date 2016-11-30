@@ -44,7 +44,8 @@ public class LoadSave
         
         stage.setRoomSideDescription(outside, "west", "I can see bushes separating this house from the neighbour");
         int trashCan = stage.createFurniture(outside, "west", "trash_can", "It's the reccycle bin...", false, false, 0);
-        int metal_scrap = stage.createFurnitureItem(outside, "metal_scrap", "It's a metal bar.. this can be usefull");
+        int wood = stage.createFurnitureItem(trashCan, "wood", "a piece of wood");
+        int metal_scrap = stage.createFurnitureItem(trashCan, "metal_scrap", "It's a metal bar.. this can be usefull");
         
         stage.setRoomSideDescription(outside, "up", "It's a sunny day.");
         stage.createStaticItem(outside, "up", "sun", "Yup... it is the sun");        
@@ -73,6 +74,7 @@ public class LoadSave
         stage.setRoomSideDescription(livingRoom, "down", "There is glass on the floor");
         stage.createStaticItem(livingRoom, "down", "glass","Broken glass... probably from the broken window");
         stage.createStaticItem(livingRoom, "down", "blood", "blood splats... i wonder whose blood is it");
+        int rock = stage.createItem(livingRoom, "down", "rock", "It's a rock.");
 
         // Kitchen
         int kitchen = stage.createRoom("Kitchen","You can see a stove.\nYou can sense the smell of burning on the stove");
@@ -111,32 +113,51 @@ public class LoadSave
         int mag = stage.createItem(hallway, "down", "gun_magazine", "It's a 9mm magazine for a small handgun");
         
         //Bedroom
-        int bedroom = stage.createRoom("Bedroom","You can see a trail of blood leading to the bedroom's bathroom.\nThere is a purse open up on the bed.\nThe drawers are open and some objects are missing.");
-        int drawer = stage.createFurniture(bedroom, "south", "drawer", "It's a drawer", false, false, 0);
-        int ammo = stage.createFurnitureItem(drawer, "ammo", "9mm ammunition");
+        int bedroom = stage.createRoom("Bedroom","It's a classy bedroom. It's messy. looks like someone have a fight here.");
+        stage.setRoomSideDescription(bedroom, "north", "there is a bed over here");
+        int bed = stage.createFurniture(bedroom, "north", "bed", "it's a messy bed", true, false, 0);
+        int ammo = stage.createFurnitureItem(bed, "ammo", "9mm ammunition");
+        stage.setRoomSideDescription(bedroom, "east", "a drawer and a door...");
+        int drawer = stage.createFurniture(bedroom, "east", "drawer", "It's a drawer", false, false, 0);
+        int pin = stage.createFurnitureItem(drawer, "hair_pin", "small hair pin.Maybe i could use this as a lockpick tool");
+        stage.setRoomSideDescription(bedroom, "south", "the way to the hallway");
+        stage.createStaticItem(bedroom, "south", "interruptor", "not touching the interruptors...");
+        stage.setRoomSideDescription(bedroom, "west", "I can a window... I can see the backyard");
+        stage.createStaticItem(bedroom, "west", "window", "Huge window. I can see a guy holding a girl hostage.. i should get closer");
+        stage.setRoomSideDescription(bedroom, "up", "the lights up above");
+        stage.setRoomSideDescription(bedroom, "down", "The floor");
         
         // Bathroom2
-        int bathroom2 = stage.createRoom("Bedroom's Bathroom","This bathroom is covered in blood and you can see a corpse inside the tub.\nshe has a deep cut on her leg");
+        int bathroom2 = stage.createRoom("Bedroom's Bathroom","Small bathroom..");
+        stage.setRoomSideDescription(bathroom2, "east", "There is a shower over there");
+        stage.setRoomSideDescription(bathroom2, "south", "toilet ... clean");
+        stage.setRoomSideDescription(bathroom2, "west", "exit...");
+        stage.setRoomSideDescription(bathroom2, "north", "mirror broken here");
+        stage.createStaticItem(bathroom2, "north", "mirror", "broken mirror.. someone hit this mirror.. there is hair over here..");
+        stage.setRoomSideDescription(bathroom2, "up", "just the lights");
+        stage.setRoomSideDescription(bathroom2, "down", "broken glass here..");
         int p290 = stage.createItem(bathroom2, "down", "p290", "It's a small handgun. 9mm");
         
 
+        // Garden
+        int garden = stage.createRoom("Backyard", "It's a beatifull garden");
+        stage.setRoomSideDescription(garden, "north", "The guy is holding her as hostage");
+        int fire_extinguisher = stage.createItem(garden, "north", "fire_extinguisher", "It's a fire extinguisher");
         
         
+        //Attach Rooms / Creating Doors
         stage.attachRoom(outside, "north", livingRoom,"door","The door has a broken window");
         
         stage.attachRoom(livingRoom,"north",hallway,"hallway","Hallway passage");
         stage.attachRoom(livingRoom,"east",bathroom);
         stage.attachRoom(livingRoom,"west",kitchen);
-        
-        stage.attachRoom(hallway, "north", bedroom);
+        stage.attachRoom(hallway, "north", bedroom,"stairs","Wooden staris.'vintage'...");
 
+        stage.attachRoom(kitchen,"north", garden);        
+        stage.attachRoom(bedroom, "east", bathroom2,"door","This doors was broken");
         
-        stage.attachRoom(bathroom, "south", livingRoom);
-        
-        stage.attachRoom(kitchen,"east", livingRoom);        
-        
-        stage.attachRoom(bedroom, "east", bathroom2);
-        
+        stage.setCombination(wood, rock, hammer);
+        stage.setCombination(hammer, metal_scrap, crowbar);
         stage.setCombination(mag, ammo, full_mag);
         stage.setCombination(full_mag, p290, p290_loaded);
         stage.setPLayerInitialRoom(outside);

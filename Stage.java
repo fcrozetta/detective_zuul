@@ -469,13 +469,13 @@ public class Stage
         Item item = null;
         for(Thing t: this.allObjects){
             if(t.getName().equals(name)){
-                item=(Item)t;
+                if(t instanceof Item){
+                    this.player.pickItem((Item)t);
+                    this.removePlayerViewThing(name);
+                }
             }
         }
-        if(item instanceof Item){
-            this.player.pickItem((Item)item);
-            this.removePlayerViewThing(name);
-        }
+        
     }
     
     /**
